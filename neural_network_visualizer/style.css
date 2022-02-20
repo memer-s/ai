@@ -1,0 +1,19 @@
+body {
+   margin: 0;
+}
+
+textarea {
+   height: 130px;
+}
+
+section {
+   display: flex;
+   flex-direction: column;
+   width: 100vw;
+}
+
+div {
+   display: flex;
+   flex-direction: column;
+   width: 100vw;
+}

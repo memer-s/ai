@@ -17,7 +17,7 @@ def initNetwork(n_inputs, n_hidden_layers, n_hidden_nodes, n_outputs):
     input_layer = {'layer': []}
 
     for _ in range(n_inputs):
-        input_layer['layer'].append({'value': 0.98})
+        input_layer['layer'].append({'value': 0.7})
     network['layers'].append(input_layer)
 
     for _ in range(n_hidden_layers):
@@ -66,7 +66,7 @@ def get_output(network):
 
 def main():
     print("Author: @devMimer / Github: memer-s")
-    net = initNetwork(2, 2, 4, 100)
+    net = initNetwork(3, 20, 10, 5)
     print(net)
     print("-----")
     net = calculate_sum(net)
