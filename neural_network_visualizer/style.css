@@ -1,5 +1,15 @@
+:root {
+   color-scheme: dark;
+
+}
+
+canvas {
+   background-color: #2b2a33;
+}
+
 body {
    margin: 0;
+   background-color: #2b2a33;
 }
 
 textarea {

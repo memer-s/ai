@@ -1,4 +1,3 @@
-import {line} from 'd3';
 import p5 from 'p5'
 import './style.css'
 
@@ -17,16 +16,17 @@ function readData() {
 const spacingx = 80;
 const spacingy = 50;
 const size = 25;
-const yoffset = 100;
+let yoffset = 100;
+let xoffset = 0;
 
 const sketch = (s) => {
    s.setup = () => {
       s.createCanvas(1920, 800);
+      s.background([0x2b, 0x2a, 0x33])
    }
 
    s.draw = () => {
       s.clear()
-      s.background(255);
 
 
       for (let j = 1; j < network.layers.length; j++) {
@@ -42,9 +42,9 @@ const sketch = (s) => {
                let offset2 = s.height - (network.layers[j - 1].layer.length * spacingy);
                s.line(
                   (j * spacingx) + yoffset,
-                  (i * spacingy) + offset / 2,
+                  (i * spacingy) + offset / 2 + xoffset,
                   ((j - 1) * spacingx) + yoffset,
-                  (k * spacingy) + offset2 / 2
+                  (k * spacingy) + offset2 / 2 + xoffset
                )
                s.stroke(0)
             }
@@ -63,7 +63,27 @@ const sketch = (s) => {
 
          }
       }
+
    }
+
+   function keyPressed() {
+      if (s.keyCode == s.RIGHT_ARROW) {
+         yoffset += 50
+      }
+      if (s.keyCode == s.LEFT_ARROW) {
+         yoffset -= 50
+      }
+      if (s.keyCode == s.UP_ARROW) {
+         xoffset -= 50
+         console.log("bruhh")
+      }
+      if (s.keyCode == s.DOWN_ARROW) {
+         xoffset += 50
+         console.log("bruhh")
+      }
+   }
+
+   s.keyPressed = keyPressed;
 }
 
 document.getElementById("btn").addEventListener('click', readData);
