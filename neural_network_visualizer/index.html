@@ -4,14 +4,21 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>bruh</title>
+    <title>Neural Network viewer</title>
   </head>
   <body>
     <section>
-      <div>
-        <textarea id="net" placeholder="insert neural_network"></textarea>
-        <button id="btn">Load Network</button>
-      </div>
+       <div class="controls">
+          <div class="control">
+           <textarea id="net" placeholder="insert neural_network"></textarea>
+           <button id="btn">Load Network</button>
+           <div style="text-align: center;">
+               <p>Use Shift/ Ctrl to increase / decrease stroke weight</p>
+           </div>
+         </div>
+         <button class="hide" onclick="document.getElementsByClassName('control')[0].style = 'display: none;'; document.getElementsByClassName('unhide')[0].style = 'display: inline;'; document.getElementsByClassName('hide')[0].style = 'display: none;'">Hide</button>
+         <button class="unhide" style="display: none;" onclick="document.getElementsByClassName('control')[0].style = 'display: flex;'; document.getElementsByClassName('unhide')[0].style = 'display: none;'; document.getElementsByClassName('hide')[0].style = 'display: inline;'">Unhide</button>
+       </div>
       <script type="module" src="/main.js"></script>
     </section>
   </body>

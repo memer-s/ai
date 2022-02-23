@@ -66,7 +66,7 @@ def get_output(network):
 
 def main():
     print("Author: @devMimer / Github: memer-s")
-    net = initNetwork(3, 20, 10, 5)
+    net = initNetwork(3, 6, 6, 2)
     print(net)
     print("-----")
     net = calculate_sum(net)

@@ -6,22 +6,22 @@ let network = {
       layer: []
    }]
 }
-
 function readData() {
    let nn = document.getElementById("net").value;
    console.log(JSON.parse(nn.replaceAll("'", '"')))
    network = JSON.parse(nn.replaceAll("'", '"'))
 }
 
-const spacingx = 80;
-const spacingy = 50;
-const size = 25;
+let spacingx = 80;
+let spacingy = 50;
+let size = 25;
 let yoffset = 100;
 let xoffset = 0;
+let strokeWeight = 1;
 
 const sketch = (s) => {
    s.setup = () => {
-      s.createCanvas(1920, 800);
+      s.createCanvas(s.windowWidth, s.windowHeight);
       s.background([0x2b, 0x2a, 0x33])
    }
 
@@ -59,14 +59,14 @@ const sketch = (s) => {
          for (let i = 0; i < network.layers[j].layer.length; i++) {
 
             s.fill([0, -network.layers[j].layer[i].value * 256, network.layers[j].layer[i].value * 256])
-            s.circle((j * spacingx) + yoffset, (i * spacingy) + offset / 2, size);
+            s.circle((j * spacingx) + yoffset, (i * spacingy) + offset / 2 + xoffset, size);
 
          }
       }
 
    }
 
-   function keyPressed() {
+   s.keyPressed = function () {
       if (s.keyCode == s.RIGHT_ARROW) {
          yoffset += 50
       }
@@ -75,15 +75,42 @@ const sketch = (s) => {
       }
       if (s.keyCode == s.UP_ARROW) {
          xoffset -= 50
-         console.log("bruhh")
       }
       if (s.keyCode == s.DOWN_ARROW) {
          xoffset += 50
-         console.log("bruhh")
+      }
+      if (s.keyCode == s.SHIFT) {
+         strokeWeight += 1;
+         s.strokeWeight(strokeWeight)
+      }
+      if (s.keyCode == s.CONTROL) {
+         strokeWeight -= 1;
+         s.strokeWeight(strokeWeight)
       }
    }
 
-   s.keyPressed = keyPressed;
+   s.mouseDragged = function () {
+      const xDelta = s.mouseX - s.pmouseX;
+      const yDelta = s.mouseY - s.pmouseY;
+
+      xoffset += yDelta;
+      yoffset += xDelta;
+   }
+
+   s.mouseWheel = (fxn) => {
+      if (fxn.delta < 0) {
+         spacingx *= 1.1;
+         spacingy *= 1.1;
+         size *= 1.1;
+         //yoffset *= 0.9
+      }
+      else {
+         spacingx *= 0.9;
+         spacingy *= 0.9;
+         //yoffset *= 1.1
+         size *= 0.9;
+      }
+   }
 }
 
 document.getElementById("btn").addEventListener('click', readData);
