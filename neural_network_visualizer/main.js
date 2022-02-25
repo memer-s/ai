@@ -6,6 +6,11 @@ let network = {
       layer: []
    }]
 }
+
+function clear() {
+   document.getElementById("net").value = "";
+}
+
 function readData() {
    let nn = document.getElementById("net").value;
    console.log(JSON.parse(nn.replaceAll("'", '"')))
@@ -114,5 +119,6 @@ const sketch = (s) => {
 }
 
 document.getElementById("btn").addEventListener('click', readData);
+document.getElementById("clear").addEventListener('click', clear)
 
 new p5(sketch)
